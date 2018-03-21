@@ -1,3 +1,11 @@
+// react-native application to demonstrate general authentication with firebase, and handling form input
+// basic react native topics covered
+// firebase console and configuration for authentication
+// handling text input with login form
+// state object to tell input what its value should be
+// conditional rendering to render different content in components
+// gave user feedback with error message and a loading spinner graphic
+
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import firebase from 'firebase';
@@ -36,7 +44,7 @@ class App extends Component {
         switch (this.state.loggedIn) {
             case true:
                 return (
-                    <Button>
+                    <Button orPress={() => firebase.auth().signOut()}>
                         Logout Here
                     </Button>
                 );
@@ -45,10 +53,6 @@ class App extends Component {
             default:
                 return <Spinner size="large" />;
         }
-        if (this.state.loggedIn) {
-            
-        }
-
         
     }
 

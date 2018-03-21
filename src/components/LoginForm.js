@@ -35,7 +35,7 @@ class LoginForm extends Component {
 
 
     onLoginSuccess() {
-        this.setState({ 
+        this.setState({
             email: '',
             pwd: '',
             loading: false,
