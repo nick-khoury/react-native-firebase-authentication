@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import firebase from 'firebase';
 
-import { Header } from './components/common';
+import { Header, Button, Spinner } from './components/common';
 import LoginForm from './components/LoginForm';
 
 
 class App extends Component {
 
-    state = { loggedIn: false };
+    state = { loggedIn: null };
 
     componentWillMount() { //lifecycle method
 
@@ -22,7 +22,7 @@ class App extends Component {
         });
 
         firebase.auth().onAuthStateChanged((user) => { // called when user signs in or out
-            // user is null when signing out
+            // user is null when signed out
             if (user) {
                 this.setState({ loggedIn: true });
             } else {
@@ -31,11 +31,33 @@ class App extends Component {
         });
     }
 
+
+    renderContent() {
+        switch (this.state.loggedIn) {
+            case true:
+                return (
+                    <Button>
+                        Logout Here
+                    </Button>
+                );
+            case false:
+                return <LoginForm />;
+            default:
+                return <Spinner size="large" />;
+        }
+        if (this.state.loggedIn) {
+            
+        }
+
+        
+    }
+
+
     render() {
         return (
             <View>
                 <Header headerText="Authentication" />
-                <LoginForm />
+                {this.renderContent()}
             </View>
         );
     }
